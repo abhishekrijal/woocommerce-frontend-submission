@@ -126,11 +126,6 @@ class Wc_Frontend_Submit {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wc-frontend-submit-submit-form-shortcode.php';
 
-		/**
-		 * The class responsible for Plugin Dependencies.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wc-frontend-submit-dependencies.php';
-
 		$this->loader = new Wc_Frontend_Submit_Loader();
 
 	}
@@ -166,9 +161,6 @@ class Wc_Frontend_Submit {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		//Check Woocommerce Dependencies.
-		$this->loader->add_action('admin_notices', $plugin_admin, 'wc_frontend_check_dependebcies', 1 );
-
 		//add menu page 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'wc_frontend_add_menu_page' );
 
@@ -187,6 +179,32 @@ class Wc_Frontend_Submit {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Show Woocommerce missing message error.
+	 *
+	 * @since 1.0.0
+	 * 
+	 */
+
+	public function activation_error(){
+
+		echo sprintf("<div class='error'><p><strong>%1s</strong> <a target='_blank' href='http://wordpress.org/plugins/woocommerce/'>%2s</a>%3s</p></div>",__( 'WC Frontend Submission :', 'wc-frontend-submit'), __( 'woocommerce', 'wc-frontend-submit') , __( ' needs to be installed and activated to use the plugin.', 'wc-frontend-submit') );
+
+	}
+
+	/**
+	 * Show Woocommerce missing message error.
+	 *
+	 * @since 1.0.0
+	 * 
+	 */
+
+	public function show_error(){
+
+		add_action('admin_notices', array( $this, 'activation_error' ) );
 
 	}
 

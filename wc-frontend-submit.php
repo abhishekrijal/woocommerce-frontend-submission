@@ -56,6 +56,8 @@ register_deactivation_hook( __FILE__, 'deactivate_wc_frontend_submit' );
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-wc-frontend-submit.php';
 
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
 /**
  * Begins execution of the plugin.
  *
@@ -68,7 +70,20 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wc-frontend-submit.php';
 function run_wc_frontend_submit() {
 
 	$plugin = new Wc_Frontend_Submit();
-	$plugin->run();
+
+	if( is_plugin_active('woocommerce/woocommerce.php') ) :
+
+		$plugin->run();
+
+	else :
+
+		$plugin->show_error();
+
+		deactivate_plugins(plugin_basename(__FILE__));
+
+		unset($_GET['activate']);
+
+	endif;
 
 }
 run_wc_frontend_submit();

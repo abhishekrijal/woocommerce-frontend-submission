@@ -31,17 +31,8 @@ class Wc_Frontend_Submit_Shortcode_Class {
 	 */
 	public function wc_frontend_submit_product_submission_form_callback() {
 
-		$dependencies = new Wc_Frontend_Submit_Check_Dependencies();
 
-		$dependencies->is_woo_active();
-
-		if( ! $dependencies ) :
-
-			return "Woo not active";
-
-		else : return "Woo is active";
-
-		endif;
+		return "Hello World";
 
 
 	}

@@ -101,24 +101,6 @@ class Wc_Frontend_Submit_Admin {
 	}
 
 	/**
-	 * [wc_frontend_check_dependebcies Check Dependency : Woocommerce]
-	 * 
-	 * @return [type] [Check Dependency : Woocommerce]
-	 *
-	 * @since 1.0.0
-	 */
-	public function wc_frontend_check_dependebcies() {
-
-		$dependencies = new Wc_Frontend_Submit_Check_Dependencies();
-	    
-	    if ( ! $dependencies->is_woo_active() ) :
-	        
-	        echo sprintf("<div class='error'><p><strong>%1s</strong> <a target='_blank' href='http://wordpress.org/plugins/woocommerce/'>%2s</a>%3s</p></div>",__( 'WC Frontend Submission :', 'wc-frontend-submit'), __( 'woocommerce', 'wc-frontend-submit') , __( ' needs to be installed and activated to use the plugin.', 'wc-frontend-submit') );
-	    
-	    endif;
-	}
-
-	/**
 	 * [wc_frontend_add_menu_page description]
 	 * 
 	 * @return [type] [description]
@@ -126,10 +108,6 @@ class Wc_Frontend_Submit_Admin {
 	 * @since 1.0.0
 	 */
 	public function wc_frontend_add_menu_page() {
-
-		$dependencies = new Wc_Frontend_Submit_Check_Dependencies();
-
-		if( $dependencies->is_woo_active() ) :
 
 			add_menu_page(
 			    __( 'WC Frontend Submit', 'wc-frontend-submit' ),
@@ -140,8 +118,6 @@ class Wc_Frontend_Submit_Admin {
 				'dashicons-cart',
 				26
 			);
-
-		endif;
 
 	}
 	

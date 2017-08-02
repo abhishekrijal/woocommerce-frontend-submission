@@ -2,3 +2,27 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+.wc-frontend-submit-admin-dashboard #heading h2 {
+
+	text-align: center;
+	line-height: 95px;
+	color: #ffffff;
+	font-size: 25px;
+}
+
+.wc-frontend-submit-admin-dashboard #heading {
+
+	height: 100px;
+	background-color: rgba(137, 39, 154, 0.54);
+}
+
+.wc-frontend-submit-admin-dashboard #primary {
+
+	width: 80%;
+}
+
+.wc-frontend-submit-admin-dashboard #primary {
+
+	width: 20%;
+}

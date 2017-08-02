@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin bootstrap file
  *
@@ -15,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:       Woocommerce Frontend Submission
  * Plugin URI:        http://laratweets.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Manage your WooCommerce store from the frontend. Manage Users / Users roles with a custom User Friendly Dashboard.
  * Version:           1.0.0
  * Author:            Abhishek Rijal
  * Author URI:        http://laratweets.com

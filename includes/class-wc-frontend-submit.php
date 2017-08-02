@@ -76,6 +76,8 @@ class Wc_Frontend_Submit {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
+		$this->init_shortcodes();
+
 	}
 
 	/**
@@ -119,6 +121,16 @@ class Wc_Frontend_Submit {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wc-frontend-submit-public.php';
 
+		/**
+		 * The class responsible for Setting Form Shortcode.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wc-frontend-submit-submit-form-shortcode.php';
+
+		/**
+		 * The class responsible for Plugin Dependencies.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wc-frontend-submit-dependencies.php';
+
 		$this->loader = new Wc_Frontend_Submit_Loader();
 
 	}
@@ -153,6 +165,12 @@ class Wc_Frontend_Submit {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		//Check Woocommerce Dependencies.
+		$this->loader->add_action('admin_notices', $plugin_admin, 'wc_frontend_check_dependebcies', 1 );
+
+		//add menu page 
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'wc_frontend_add_menu_page' );
 
 	}
 
@@ -210,6 +228,18 @@ class Wc_Frontend_Submit {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Init shortcodes.
+	 *
+	 * @since    1.0.0
+	 */
+	public function init_shortcodes() {
+
+		$plugin_shortcode = new Wc_Frontend_Submit_Shortcode_Class();
+		$plugin_shortcode->init_shortcode();
+
 	}
 
 }

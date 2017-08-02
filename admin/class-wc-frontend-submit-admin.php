@@ -100,4 +100,92 @@ class Wc_Frontend_Submit_Admin {
 
 	}
 
+	/**
+	 * [wc_frontend_check_dependebcies Check Dependency : Woocommerce]
+	 * 
+	 * @return [type] [Check Dependency : Woocommerce]
+	 *
+	 * @since 1.0.0
+	 */
+	public function wc_frontend_check_dependebcies() {
+
+		$dependencies = new Wc_Frontend_Submit_Check_Dependencies();
+	    
+	    if ( ! $dependencies->is_woo_active() ) :
+	        
+	        echo sprintf("<div class='error'><p><strong>%1s</strong> <a target='_blank' href='http://wordpress.org/plugins/woocommerce/'>%2s</a>%3s</p></div>",__( 'WC Frontend Submission :', 'wc-frontend-submit'), __( 'woocommerce', 'wc-frontend-submit') , __( ' needs to be installed and activated to use the plugin.', 'wc-frontend-submit') );
+	    
+	    endif;
+	}
+
+	/**
+	 * [wc_frontend_add_menu_page description]
+	 * 
+	 * @return [type] [description]
+	 *
+	 * @since 1.0.0
+	 */
+	public function wc_frontend_add_menu_page() {
+
+		$dependencies = new Wc_Frontend_Submit_Check_Dependencies();
+
+		if( $dependencies->is_woo_active() ) :
+
+			add_menu_page(
+			    __( 'WC Frontend Submit', 'wc-frontend-submit' ),
+			    __( 'WC Frontend Submit', 'wc-frontend-submit' ),
+			    'manage_options',
+			    'wc-frontend-submit',
+			    array( $this, 'menu_page_callback' ),
+				'dashicons-cart',
+				26
+			);
+
+		endif;
+
+	}
+	
+	/**
+	 * [menu_page_callback Callback for mnu page]
+	 * @return [type] [Callback for mnu page]
+	 *
+	 * @since 1.0.0
+	 */
+	
+	public function menu_page_callback(){
+
+	?>
+		<div class="wc-frontend-submit-admin-dashboard wrap">
+			
+			<div id="heading">
+				
+				<h2><?php esc_html_e('Woocommerce Frontend Submission : Settings', 'wc-frontend-submit'); ?></h2>
+
+			</div>
+
+			<div id="primary">
+				
+				<form method="post">
+					
+					<div class="field-group">
+						<label for="enable-submit"><?php esc_html_e('Enable Frontend Product Submission', 'wc-frontend-submit'); ?></label><input type="checkbox" name="enable-submit">
+					</div>
+
+				</form>
+
+			</div>
+
+			<div id="sidebar">
+				
+
+			</div>
+
+		</div>
+
+	<?php
+
+	}
+
+
+
 }
